@@ -11,7 +11,7 @@ import javax.enterprise.context.RequestScoped;
 
 /**
  *
- * @author johngonzalez
+ * @author Nelson
  */
 @Named(value = "loginBean")
 @RequestScoped
@@ -19,15 +19,14 @@ public class LoginBean {
     
     private String user;
     private String password;
-    private String message;
-    
+    private String message = "";
 
     /**
      * Creates a new instance of LoginBean
      */
     public LoginBean() {
     }
-    
+
     public String getUser() {
         return user;
     }
@@ -42,7 +41,7 @@ public class LoginBean {
 
     public void setPassword(String password) {
         this.password = password;
-    }    
+    }
 
     public String getMessage() {
         return message;
@@ -54,8 +53,14 @@ public class LoginBean {
     
     public String loginUser(){   
         HandleLogin login = new HandleLogin();
-        message = login.verifyCredential(user, password);
-        //createAccount.createAccount(name, passwordAccount, document);   
+        message = login.validateLogin(user, password);
+        if (message.equals("")) return "index";
+        else return "envio";
+    }
+    
+    public String createUser(){   
+        HandleLogin login = new HandleLogin();
+        message = login.createUsuario(-1, "Fulanito", "N/A", "NINGUNO", password, user);
         return "envio";
     }
     

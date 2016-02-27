@@ -6,16 +6,21 @@
         <title>Empresa Logística</title>
     </h:head>
     <h:body>
-        <h:panelGrid columns="2">
-            <h:outputLabel for="txtUser" value="Usuario:" />
-            <h:outputText id="txtUser" value="#{loginBean.user}" />
-
-            <h:outputLabel for="txtPass" value="Password:" />
-            <h:outputText id="txtPass" value="#{loginBean.password}"/>
-            
-            <h:outputLabel for="txtMessage" value="Mensaje:" />
-            <h:outputText id="txtMessage" value="#{loginBean.message}"/>
-        </h:panelGrid>
+        <panel>
+            <h:form>
+        <h:panelGrid columns="2"/>
+        <h:outputLabel for="txtUser" value="Usuario:"/>
+        <h:outputText id="txtUser" value="#{loginBean.user}"/>
+        <br/>
+        <h:outputLabel for="txtPass" value="Contraseña:"/>
+        <h:outputText id="txtPass" value="#{loginBean.password}"/> 
+        <br/>
+        <h:outputText value="#{loginBean.message}"/>
+        <br/>
+        <a href="index.xhtml">Inicio</a>
+        <br/> 
+        </h:form>
+        </panel>
     </h:body>
 </html>
 

@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -23,16 +25,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author johngonzalez
+ * @author Nelson
  */
 @Entity
-@Table(name = "Solicitud")
+@Table(name = "solicitud")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Solicitud.findAll", query = "SELECT s FROM Solicitud s"),
     @NamedQuery(name = "Solicitud.findById", query = "SELECT s FROM Solicitud s WHERE s.id = :id"),
-    @NamedQuery(name = "Solicitud.findByIdServicio", query = "SELECT s FROM Solicitud s WHERE s.idServicio = :idServicio"),
-    @NamedQuery(name = "Solicitud.findByIdUsuario", query = "SELECT s FROM Solicitud s WHERE s.idUsuario = :idUsuario"),
     @NamedQuery(name = "Solicitud.findByFecha", query = "SELECT s FROM Solicitud s WHERE s.fecha = :fecha")})
 public class Solicitud implements Serializable {
 
@@ -44,17 +44,15 @@ public class Solicitud implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_servicio")
-    private int idServicio;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_usuario")
-    private int idUsuario;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    @JoinColumn(name = "id_servicio", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Servicio idServicio;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Usuario idUsuario;
 
     public Solicitud() {
     }
@@ -63,10 +61,8 @@ public class Solicitud implements Serializable {
         this.id = id;
     }
 
-    public Solicitud(Integer id, int idServicio, int idUsuario, Date fecha) {
+    public Solicitud(Integer id, Date fecha) {
         this.id = id;
-        this.idServicio = idServicio;
-        this.idUsuario = idUsuario;
         this.fecha = fecha;
     }
 
@@ -78,28 +74,28 @@ public class Solicitud implements Serializable {
         this.id = id;
     }
 
-    public int getIdServicio() {
-        return idServicio;
-    }
-
-    public void setIdServicio(int idServicio) {
-        this.idServicio = idServicio;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
     public Date getFecha() {
         return fecha;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Servicio getIdServicio() {
+        return idServicio;
+    }
+
+    public void setIdServicio(Servicio idServicio) {
+        this.idServicio = idServicio;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

@@ -6,16 +6,26 @@
         <title>Empresa Logística</title>
     </h:head>
     <h:body>
+        <h2>Iniciar sesión</h2>
+        <hr />
         <h:form>
-            <h:outputLabel for="txtUser" value="Usuario:" />
-            <h:inputText id="txtUser" label="Usuario" value="#{loginBean.user}" required="true" />
-            <h:message for="txtUser" />
+            <h:panelGrid columns="2" cellpadding="10" cellspacing="1">
+                <!--<h:outputLabel for="txtUser" value="Usuario:"/>-->
+                <label>Usuario:</label>
+                <h:inputText id="txtUser" label="Usuario" value="#{loginBean.user}" required="true"/>
+                <!--<h:message for="txtUser"/>-->
+                <!--<h:outputLabel for="txtPass" value="Contraseña:"/>-->
+                <label>Contraseña:</label>
+                <h:inputSecret id="txtPass" label="Password" value="#{loginBean.password}" required="true"/>
+                <!--<h:message for="txtPass"/>-->
+                <h:panelGroup style="display:block;">
+                    <h:commandButton id="btnEnviar" value="Enviar" action="#{loginBean.loginUser()}"/>
+                </h:panelGroup>
+            </h:panelGrid>
+            <h:outputText value="#{loginBean.message}"/>
             <br/>
-            <h:outputLabel for="txtPass" value="Password:" />
-            <h:inputSecret id="txtPass" label="Password" value="#{loginBean.password}" required="true" />
-            <h:message for="txtPass" />
-            <br/>
-            <h:commandButton id="btnEnviar" value="Enviar" action="#{loginBean.loginUser()}" />
+            <a href="registro.xhtml">Registrarse</a>
+            
         </h:form>
     </h:body>
 </html>
