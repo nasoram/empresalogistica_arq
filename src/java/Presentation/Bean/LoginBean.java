@@ -51,10 +51,14 @@ public class LoginBean {
         this.message = message;
     }
     
+    public Boolean notMenssage(){
+        return !this.message.equals("");
+    }
+    
     public String loginUser(){   
         HandleLogin login = new HandleLogin();
         message = login.validateLogin(user, password);
-        if (message.equals("")) return "index";
+        if (!message.equals("")) return "index";
         else return "envio";
     }
     

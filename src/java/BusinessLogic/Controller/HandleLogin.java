@@ -43,10 +43,10 @@ public class HandleLogin {
         Usuario usuarioR = usuarioDAO.searchByUsuario(usuario);
         if (usuarioR != null) {
             if (usuarioR.getPassword().equals(password))
-                result = "Su cuenta de usuario es: " + usuarioR.getUsuario() + "\ny su contraseña: " + usuarioR.getPassword();
-            else result = "La contraseña no es correcta.";
+                result = "";//"Su cuenta de usuario es: " + usuarioR.getUsuario() + "\ny su contraseña: " + usuarioR.getPassword();
+            else result = "La contraseña es incorrecta.";
         } else {
-            result = "la cuenta no existe.";
+            result = "La cuenta no existe.";
         } 
         
         return result;
