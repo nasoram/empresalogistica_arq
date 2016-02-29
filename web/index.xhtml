@@ -1,32 +1,38 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Empresa Logística</title>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/login.css" />
     </h:head>
     <h:body>
-        <h2>Iniciar sesión</h2>
-        <hr />
-        <h:form>
-            <h:panelGrid columns="2" cellpadding="10" cellspacing="1">
-                <!--<h:outputLabel for="txtUser" value="Usuario:"/>-->
-                <label>Usuario:</label>
-                <h:inputText id="txtUser" label="Usuario" value="#{loginBean.user}" required="true"/>
-                <!--<h:message for="txtUser"/>-->
-                <!--<h:outputLabel for="txtPass" value="Contraseña:"/>-->
-                <label>Contraseña:</label>
-                <h:inputSecret id="txtPass" label="Password" value="#{loginBean.password}" required="true"/>
-                <!--<h:message for="txtPass"/>-->
-                <h:panelGroup style="display:block;">
-                    <h:commandButton id="btnEnviar" value="Enviar" action="#{loginBean.loginUser()}"/>
-                </h:panelGroup>
-            </h:panelGrid>
-            <h:outputText value="#{loginBean.message}"/>
-            <br/>
-            <a href="registro.xhtml">Registrarse</a>
+        <div class="container">
+        <h:form class="form-signin">
             
-        </h:form>
+            <center><h2 class="form-signin-heading">EMPRESA LOGISTICA<br/> <small>[Inicio de sesión] <span class="glyphicon glyphicon-user"></span></small></h2></center>
+                
+            <h:outputLabel for="txtUser" value="Usuario:" class="sr-only"/>
+            <h:inputText id="txtUser" class="form-control" label="Usuario" value="#{loginBean.user}" pt:placeholder="Usuario" required="true"/>
+            <h:message for="txtUser"/>
+            
+            <h:outputLabel for="txtPass" value="Contraseña:" class="sr-only"/>
+            <h:inputSecret id="txtPass" class="form-control" label="Password" value="#{loginBean.password}" pt:placeholder="Contraseña" required="true" />
+            <h:message for="txtPass"/>
+            
+            <h:commandButton id="btnEnviar" class="btn btn-lg btn-primary btn-block" value="Enviar" action="#{loginBean.loginUser()}"/>
+            
+            <h:outputText value="#{loginBean.message}"/>
+            
+            <br/>
+            
+            <a href="registro.xhtml" class="pull-right" >Registrarse <span class="glyphicon glyphicon-menu-right"></span></a>
+
+            </h:form>
+        </div>
+        <script type="text/javascript" src="js/bootstrap.min.js" ></script>
     </h:body>
 </html>
 
