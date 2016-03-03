@@ -1,35 +1,63 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Empresa Logistica</title>
+        <title>Empresa Logística</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/login.css" />
     </h:head>
     <h:body>
-        <h2>Registro</h2>
-        <hr />
-        <h:form>
-            <h:panelGrid columns="2" cellpadding="10" cellspacing="1">
-                <label>Nombre:</label>
-                <h:inputText id="txtNombre" label="Nombre" value="" required="true"/>
-                <label>Usuario:</label>
-                <h:inputText id="txtUser" label="Usuario" value="" required="true"/>
-                <label>Documento:</label>
-                <h:inputText id="txtId" label="Documento" value="" required="true"/>
-                <label>Contraseña:</label>
-                <h:inputSecret id="txtPass" label="Password" value="" required="true"/>
-                <br/>
-                <label>Repetir contraseña:</label>
-                <h:inputSecret id="txtPass2" label="Password2" value="" required="true"/>
-                <h:panelGroup style="display:block;">
-                    <h:commandButton id="btnEnviar" value="Enviar" action="#"/>
-                </h:panelGroup>
-                <br/>
-            </h:panelGrid>
-            <h:outputText value=""/>
+        <div class="container">
+        <h:form class="form-signin">
+            
+            <center><h2 class="form-signin-heading">EMPRESA LOGISTICA<br/> <small>[Registro de Cliente] <span class="glyphicon glyphicon-user"></span></small></h2></center>
+                
+            <h:outputLabel for="txtUser" value="Usuario:" class="sr-only"/>
+            <h:inputText id="txtUser" class="form-control" label="Usuario" value="#{userBean.user}" pt:placeholder="Usuario" required="true"/>
+            <h:message for="txtUser"/>
+            
+            <h:outputLabel for="txtName" value="Nombre:" class="sr-only"/>
+            <h:inputText id="txtName" class="form-control" label="Nombre" value="#{userBean.nombre}" pt:placeholder="Nombre" required="true"/>
+            <h:message for="txtName"/>
+            
+            <h:outputLabel for="txtDoc" value="Documento:" class="sr-only"/>
+            <h:inputText id="txtDoc" class="form-control" label="Documento" value="#{userBean.documento}" pt:placeholder="Documento" required="true"/>
+            <h:message for="txtDoc"/>
+            
             <br/>
-            <a href="index.xhtml">Inicio</a>
-        </h:form>
+            
+            <h:outputLabel for="txtPass" value="Contraseña:" class="sr-only"/>
+            <h:inputSecret id="txtPass" class="form-control" label="Contraseña" value="#{userBean.password}" pt:placeholder="Contraseña" required="true" />
+            <h:message for="txtPass"/>
+            
+            <h:outputLabel for="txtPass2" value="Repetir Contraseña:" class="sr-only"/>
+            <h:inputSecret id="txtPass2" class="form-control" label="Repetir Contraseña" value="#{userBean.password2}" pt:placeholder="Repetir Contraseña" required="true" />
+            <h:message for="txtPass2"/>
+            
+            <h:commandButton id="btnEnviar" class="btn btn-lg btn-primary btn-block" value="Enviar" action="#{userBean.createUser()}"/>
+            <br />
+            <c:if test="#{userBean.noMessage()}" >
+            
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    <h:outputText value="#{userBean.message}"/>
+                </div>
+                <br/>
+            </c:if>
+            
+            <a href="index.xhtml" class="pull-right" >Inicio <span class="glyphicon glyphicon-menu-right"></span></a>
+
+            </h:form>
+            
+        </div>
+        <script type="text/javascript" src="js/bootstrap.min.js" ></script>
     </h:body>
 </html>
 

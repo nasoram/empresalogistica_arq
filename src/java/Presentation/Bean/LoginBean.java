@@ -62,10 +62,4 @@ public class LoginBean {
         else return "envio";
     }
     
-    public String createUser(){   
-        HandleLogin login = new HandleLogin();
-        message = login.createUsuario(-1, "Fulanito", "N/A", "NINGUNO", password, user);
-        return "envio";
-    }
-    
 }

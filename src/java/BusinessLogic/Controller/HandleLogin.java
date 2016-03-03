@@ -17,26 +17,6 @@ public class HandleLogin {
     public HandleLogin() {
     }
     
-    public String createUsuario(Integer id, String nombre, String documento, String rol, String password, String usuario){
-        
-        Usuario user = new Usuario();
-        
-        user.setId(id);
-        user.setNombre(nombre);
-        user.setDocumento(documento);
-        user.setRol(rol);
-        user.setPassword(password);
-        user.setUsuario(usuario);
-        
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Usuario usuarioE = usuarioDAO.persist(user);
-        if (usuarioE != null) {
-            return "la cuenta ha sido creada, su cuenta de usuario es " + user.getUsuario() + ".";
-        } else {
-            return "la cuenta no pudo ser creada.";
-        }        
-    }
-    
     public String validateLogin(String usuario, String password){
         String result = "";
         UsuarioDAO usuarioDAO = new UsuarioDAO();
