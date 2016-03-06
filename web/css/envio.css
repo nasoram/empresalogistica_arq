@@ -18,3 +18,27 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input.superior {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input.medio {
+  border-radius: 0;
+}
+.form-signin input.inferior {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

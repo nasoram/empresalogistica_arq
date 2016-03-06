@@ -19,25 +19,25 @@
             <center><h2 class="form-signin-heading">EMPRESA LOGISTICA<br/> <small>[Registro de Cliente] <span class="glyphicon glyphicon-user"></span></small></h2></center>
                 
             <h:outputLabel for="txtUser" value="Usuario:" class="sr-only"/>
-            <h:inputText id="txtUser" class="form-control" label="Usuario" value="#{userBean.user}" pt:placeholder="Usuario" required="true"/>
+            <h:inputText id="txtUser" class="form-control superior" label="Usuario" value="#{userBean.user}" pt:placeholder="Usuario" required="true"/>
             <h:message for="txtUser"/>
             
             <h:outputLabel for="txtName" value="Nombre:" class="sr-only"/>
-            <h:inputText id="txtName" class="form-control" label="Nombre" value="#{userBean.nombre}" pt:placeholder="Nombre" required="true"/>
+            <h:inputText id="txtName" class="form-control medio" label="Nombre" value="#{userBean.nombre}" pt:placeholder="Nombre" required="true"/>
             <h:message for="txtName"/>
             
             <h:outputLabel for="txtDoc" value="Documento:" class="sr-only"/>
-            <h:inputText id="txtDoc" class="form-control" label="Documento" value="#{userBean.documento}" pt:placeholder="Documento" required="true"/>
+            <h:inputText id="txtDoc" class="form-control inferior" label="Documento" value="#{userBean.documento}" pt:placeholder="Documento" required="true"/>
             <h:message for="txtDoc"/>
             
             <br/>
             
             <h:outputLabel for="txtPass" value="Contraseña:" class="sr-only"/>
-            <h:inputSecret id="txtPass" class="form-control" label="Contraseña" value="#{userBean.password}" pt:placeholder="Contraseña" required="true" />
+            <h:inputSecret id="txtPass" class="form-control superior" label="Contraseña" value="#{userBean.password}" pt:placeholder="Contraseña" required="true" />
             <h:message for="txtPass"/>
             
             <h:outputLabel for="txtPass2" value="Repetir Contraseña:" class="sr-only"/>
-            <h:inputSecret id="txtPass2" class="form-control" label="Repetir Contraseña" value="#{userBean.password2}" pt:placeholder="Repetir Contraseña" required="true" />
+            <h:inputSecret id="txtPass2" class="form-control inferior" label="Repetir Contraseña" value="#{userBean.password2}" pt:placeholder="Repetir Contraseña" required="true" />
             <h:message for="txtPass2"/>
             
             <h:commandButton id="btnEnviar" class="btn btn-lg btn-primary btn-block" value="Enviar" action="#{userBean.createUser()}"/>

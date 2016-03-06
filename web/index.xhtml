@@ -16,14 +16,14 @@
         <div class="container">
         <h:form class="form-signin">
             
-            <center><h2 class="form-signin-heading">EMPRESA LOGISTICA<br/> <small>[Inicio de sesión] <span class="glyphicon glyphicon-user"></span></small></h2></center>
+            <center><h2 class="form-signin-heading">EMPRESA LOGÍSTICA<br/> <small>[Inicio de sesión] <span class="glyphicon glyphicon-user"></span></small></h2></center>
                 
             <h:outputLabel for="txtUser" value="Usuario:" class="sr-only"/>
-            <h:inputText id="txtUser" class="form-control" label="Usuario" value="#{loginBean.user}" pt:placeholder="Usuario" required="true"/>
+            <h:inputText id="txtUser" class="form-control superior" label="Usuario" value="#{loginBean.user}" pt:placeholder="Usuario" required="true"/>
             <h:message for="txtUser"/>
             
             <h:outputLabel for="txtPass" value="Contraseña:" class="sr-only"/>
-            <h:inputSecret id="txtPass" class="form-control" label="Password" value="#{loginBean.password}" pt:placeholder="Contraseña" required="true" />
+            <h:inputSecret id="txtPass" class="form-control inferior" label="Password" value="#{loginBean.password}" pt:placeholder="Contraseña" required="true" />
             <h:message for="txtPass"/>
             
             <h:commandButton id="btnEnviar" class="btn btn-lg btn-primary btn-block" value="Enviar" action="#{loginBean.loginUser()}"/>
@@ -39,7 +39,7 @@
                 <br/>
             </c:if>
             
-            <a href="registro.xhtml" class="pull-right" >Registrarse <span class="glyphicon glyphicon-menu-right"></span></a>
+            <h:link outcome="registro" class="pull-right" >Registrarse <span class="glyphicon glyphicon-menu-right"></span></h:link>
 
             </h:form>
             

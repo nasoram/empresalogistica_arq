@@ -6,6 +6,7 @@
 package DataAccess.DAO;
 
 import DataAccess.Entity.Usuario;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,10 +21,9 @@ public class UsuarioDAO {
     public EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmpresaLogisticaPU");
     
     public Usuario persist(Usuario usuario) {
-        
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        
+
         try {
             em.persist(usuario);
             em.getTransaction().commit();
@@ -51,4 +51,33 @@ public class UsuarioDAO {
         }
     }
     
+    public List<Usuario> listaOperadores(String rol) {
+        EntityManager em = emf.createEntityManager();
+        List<Usuario> operadores = null;
+        Query q = em.createNamedQuery("Usuario.findByRol");
+        q.setParameter(1, rol);
+        
+        try {
+            operadores = q.getResultList();
+        } catch (Exception e) {
+        } finally {
+            em.close();
+            return operadores;            
+        }
+    }
+    
+    public Usuario searchById(int id) {
+        EntityManager em = emf.createEntityManager();
+        Usuario usuario = null;
+        Query q = em.createNamedQuery("Usuario.findById");
+        q.setParameter(1, id);
+        
+        try {
+            usuario = (Usuario) q.getSingleResult();
+        } catch (Exception e) {
+        } finally {
+            em.close();
+            return usuario;
+        }
+    }
 }
