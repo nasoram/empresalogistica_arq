@@ -40,30 +40,31 @@
             <div class="row">
                 <div class="col-xs-4 col-md-offset-4" >
                     <h:form>
-                        <h2>Crear Operador</h2>
+                        <h2>Editar Operador - <h:outputText id="id" value="#{operadoresBean.verOperador()}"></h:outputText></h2>
+                        <h:inputHidden value="#{operadoresBean.id}" />
                         <div class="form-group">
+                            <h:outputLabel for="usuario" value="Usuario:"/>
                             <h:inputText id="usuario" class="form-control" value="#{operadoresBean.user}" pt:placeholder="Usuario" required="true"></h:inputText>
                             <h:message for="usuario"/>
                         </div>
                         <div class="form-group">
+                            <h:outputLabel for="nombre" value="Nombre:"/>
                             <h:inputText id="nombre" class="form-control" value="#{operadoresBean.nombre}" pt:placeholder="Nombre" required="true"></h:inputText>
                             <h:message for="nombre"/>
                         </div>
                         <div class="form-group">
+                            <h:outputLabel for="documento" value="Documento:"/>
                             <h:inputText id="documento" class="form-control" value="#{operadoresBean.documento}" pt:placeholder="Documento" required="true"></h:inputText>
                             <h:message for="documento"/>
                         </div>
                         <div class="form-group">
-                            <h:inputSecret id="pass" class="form-control" value="#{operadoresBean.password}" pt:placeholder="Contraseña" required="true"></h:inputSecret>
+                            <h:outputLabel for="pass" value="Contraseña:"/>
+                            <h:inputText id="pass" class="form-control" value="#{operadoresBean.password}" pt:placeholder="Contraseña" required="true"></h:inputText>
                             <h:message for="pass"/>
                         </div>
-                        <div class="form-group">
-                            <h:inputSecret id="pass2" class="form-control" value="#{operadoresBean.password2}" pt:placeholder="Repetir contraseña" required="true"></h:inputSecret>
-                            <h:message for="pass2"/>
-                        </div>
                         <br/>
-                        <h:commandButton class="btn btn-primary" value="Crear" action="#{operadoresBean.crearOperador()}"></h:commandButton> &nbsp;
-                        <h:link outcome="lista" class="btn btn-default">Cancelar</h:link> 
+                        <h:commandButton class="btn btn-primary" value="Editar" action="#{operadoresBean.editarOperador()}"></h:commandButton> &nbsp;
+                        <h:link outcome="lista" class="btn btn-default">Cancelar</h:link>
 
                         <c:if test="#{operadoresBean.noMessage()}" >
                             <div class="alert alert-danger" role="alert">

@@ -46,7 +46,6 @@ public class HandleOperador {
     }
     
     public Usuario verOperador(int id) {
-        System.out.println("BusinessLogic.Controller.HandleOperador.verOperador()acaaaaaaaaaaaaaaaaaaa");
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = null;
         
@@ -55,6 +54,45 @@ public class HandleOperador {
         } catch (Exception e) {
         } finally {
             return usuario;
+        }
+    }
+    
+    public String editarOperador(int id, String nombre, String documento, String password, String user) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = null;
+        
+        try {
+            usuario = usuarioDAO.searchById(id);
+            
+            usuario.setNombre(nombre);
+            usuario.setDocumento(documento);
+            usuario.setPassword(password);
+            usuario.setUsuario(user);
+
+            Usuario usuarioE = usuarioDAO.persist(usuario);
+            if (usuarioE != null) {
+                return "";
+            } else {
+                return "Operador logístico no pudo ser editado!";
+            }
+        } catch (Exception e) {
+            return "Operador logístico no fue encontrado!";
+        } 
+    }
+    
+    public String eliminarOperador(int id) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = null;
+        
+        System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler()");
+        
+        try {
+            usuario = usuarioDAO.searchById(id);
+            usuarioDAO.remove(usuario);
+            System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler.try()");
+            return "";
+        } catch (Exception e) {
+            return "Operador logístico no pudo ser eliminado!";
         }
     }
 }

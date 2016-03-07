@@ -25,13 +25,31 @@ public class UsuarioDAO {
         em.getTransaction().begin();
 
         try {
-            em.persist(usuario);
+            em.merge(usuario);
             em.getTransaction().commit();
         } catch(Exception e) {
             em.getTransaction().rollback();
         } finally {
             em.close();
             return usuario;  
+        }
+    }
+    
+    public void remove(Usuario usuario) {
+        EntityManager em = emf.createEntityManager();
+        System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler.removeeeeee()");
+        em.getTransaction().begin();
+        System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler.removeeeeee22222222222222()");
+        System.out.println(usuario.getId());
+
+        try {
+            em.remove(usuario);
+            System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler.removeeeeee333333333333()");
+            em.getTransaction().commit();
+        } catch(Exception e) {
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
         }
     }
     

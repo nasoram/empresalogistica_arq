@@ -8,8 +8,12 @@ package Presentation.Bean;
 import BusinessLogic.Controller.HandleOperador;
 import DataAccess.Entity.Usuario;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -28,6 +32,7 @@ public class OperadoresBean {
     private List<Usuario> operadores;
     private String password2;
     private int id;
+    private int dato;
     
     
     /**
@@ -131,12 +136,56 @@ public class OperadoresBean {
     }
     
     public String verOperador() {
-        //System.out.println("Presentation.Bean.OperadoresBean.verOperador()");
-        //HandleOperador operador = new HandleOperador();
+        Integer id;
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletRequest httpServletRequest=(HttpServletRequest)facesContext.getExternalContext().getRequest();
         
-        //this.nombre = operador.verOperador(id).getNombre();
         
-        return "hola";
+        if(httpServletRequest.getSession().getAttribute("idEdit")==null){
+            ExternalContext externalContext = facesContext.getExternalContext();
+            Map params = externalContext.getRequestParameterMap();
+
+            id = new Integer((String)params.get("id"));
+            
+            httpServletRequest.getSession().setAttribute("idEdit", id);
+        }else{
+            id = new Integer(httpServletRequest.getSession().getAttribute("idEdit").toString());
+            httpServletRequest.getSession().removeAttribute("idEdit");
+        }
+        
+        HandleOperador operador = new HandleOperador();
+        
+        Usuario usuarioOp = operador.verOperador(id);
+        
+        this.nombre = usuarioOp.getNombre();
+        this.user = usuarioOp.getUsuario();
+        this.documento = usuarioOp.getDocumento();
+        this.password = usuarioOp.getPassword();
+        this.id = id;
+        
+        return ""+id;
+    }
+    
+    public String editarOperador() {
+        HandleOperador operador = new HandleOperador();
+        message = operador.editarOperador(id, nombre, documento, password, user);
+        if (message.equals("")) {
+            return "lista";
+        } else {
+            return "editar";
+        }
+    }
+    
+    public String eliminarOperador(int id) {
+        HandleOperador operador = new HandleOperador();
+        System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador()");
+        System.out.println(id);
+        message = operador.eliminarOperador(id);
+        if (message.equals("")) {
+            return "lista";
+        } else {
+            return "lista";
+        }
     }
     
     public Boolean noMessage() {
