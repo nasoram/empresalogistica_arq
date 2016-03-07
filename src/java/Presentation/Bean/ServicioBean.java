@@ -159,9 +159,21 @@ public class ServicioBean {
         }
     }
     
-    public String eliminarServicio(){
+    public String eliminarServicio() {
+        Integer id;
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+
+        id = new Integer((String)params.get("id"));
+        
         HandleServicio servicio = new HandleServicio();
-        return "";
+        message = servicio.eliminarServicio(id);
+        if (message.equals("")) {
+            return "";
+        } else {
+            return "";
+        }
     }
     
     public Boolean noMessage() {

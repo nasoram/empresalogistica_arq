@@ -82,17 +82,14 @@ public class HandleOperador {
     
     public String eliminarOperador(int id) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Usuario usuario = null;
-        
-        System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler()");
+        Usuario operador = null;
         
         try {
-            usuario = usuarioDAO.searchById(id);
-            usuarioDAO.remove(usuario);
-            System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler.try()");
+            operador = usuarioDAO.searchById(id);
+            if (operador != null) usuarioDAO.remove(id);
             return "";
         } catch (Exception e) {
-            return "Operador logístico no pudo ser eliminado!";
+            return "Operador no pudo ser eliminado!";
         }
     }
 }

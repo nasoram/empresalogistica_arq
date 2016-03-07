@@ -35,16 +35,13 @@ public class UsuarioDAO {
         }
     }
     
-    public void remove(Usuario usuario) {
+    public void remove(int id) {
         EntityManager em = emf.createEntityManager();
-        System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler.removeeeeee()");
+        Usuario operador = em.find(Usuario.class, id);
         em.getTransaction().begin();
-        System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler.removeeeeee22222222222222()");
-        System.out.println(usuario.getId());
-
+        
         try {
-            em.remove(usuario);
-            System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador.handler.removeeeeee333333333333()");
+            em.remove(operador);
             em.getTransaction().commit();
         } catch(Exception e) {
             em.getTransaction().rollback();

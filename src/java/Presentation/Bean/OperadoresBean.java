@@ -176,15 +176,20 @@ public class OperadoresBean {
         }
     }
     
-    public String eliminarOperador(int id) {
+    public String eliminarOperador() {
+        Integer id;
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+
+        id = new Integer((String)params.get("id"));
+        
         HandleOperador operador = new HandleOperador();
-        System.out.println("Presentation.Bean.OperadoresBean.eliminarOperador()");
-        System.out.println(id);
         message = operador.eliminarOperador(id);
         if (message.equals("")) {
-            return "lista";
+            return "";
         } else {
-            return "lista";
+            return "";
         }
     }
     

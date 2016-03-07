@@ -6,9 +6,7 @@
 package BusinessLogic.Controller;
 
 import DataAccess.DAO.ServicioDAO;
-import DataAccess.DAO.UsuarioDAO;
 import DataAccess.Entity.Servicio;
-import DataAccess.Entity.Usuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -47,13 +45,11 @@ public class HandleServicio {
     }
     
     public Servicio verServicio(int id) {
-        System.out.println("ID=" + id);
         ServicioDAO servicioDAO = new ServicioDAO();
         Servicio servicio = null;
         
         try {
             servicio = servicioDAO.searchById(id);
-            System.out.println("HandleServicio.servicio="+servicio.toString());
         } catch (Exception e) {
         } finally {
             return servicio;
@@ -66,15 +62,10 @@ public class HandleServicio {
         
         try {
             servicio = servicioDAO.searchById(id);
-            System.out.println("llega aqui0:"+servicio.getId());
             servicio.setNombre(nombre);
-            System.out.println("llega aqui1:"+nombre);
-            System.out.println("llega aqui2:"+servicio.getNombre());
             Date fechaF = new SimpleDateFormat("MMMM dd, yyyy").parse(fecha);
             servicio.setFecha(fechaF);
-            System.out.println("llega aqui3:"+fecha);
-            System.out.println("llega aqui4:"+servicio.getFecha());
-
+            
             Servicio servicioE = servicioDAO.persist(servicio);
             if (servicioE != null) {
                 return "";
@@ -86,17 +77,16 @@ public class HandleServicio {
         } 
     }
     
-    public boolean eliminarServicio(int id) {
+    public String eliminarServicio(int id) {
         ServicioDAO servicioDAO = new ServicioDAO();
         Servicio servicio = null;
         
-        servicio = servicioDAO.searchById(id);
-        if (servicio != null) {
-            
-            return true;
-        } else {
-            return false;
+        try {
+            servicio = servicioDAO.searchById(id);
+            if (servicio != null) servicioDAO.remove(id);
+            return "";
+        } catch (Exception e) {
+            return "Servicio no pudo ser eliminado!";
         }
-        
     }
 }

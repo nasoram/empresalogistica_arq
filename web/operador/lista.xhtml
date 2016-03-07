@@ -28,8 +28,8 @@
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="../envio.xhtml">Inicio</a></li>
-                            <li><h:link outcome="lista">Operadores Logísticos</h:link></li>
-                            <li><a href="#contact">Menú 3</a></li>
+                            <li><h:link outcome="/operador/lista">Operadores Logísticos</h:link></li>
+                            <li><h:link outcome="/servicio/lista">Servicios</h:link></li>
                             <li><a href="../index.xhtml">Cerrar Sesión</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -62,7 +62,7 @@
                     <h:column>
                         <h:link outcome="ver?id=#{op.id}">Ver</h:link> &nbsp;
                         <h:link outcome="editar?id=#{op.id}">Editar</h:link> &nbsp;
-                        <h:commandLink value="Eliminar" action="#{operadoresBean.eliminarOperador(op.id)}"></h:commandLink>
+                        <h:link outcome="eliminar?id=#{op.id}">Eliminar</h:link> &nbsp;
                     </h:column>
                 </h:dataTable>
                 <br/>

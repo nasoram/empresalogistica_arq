@@ -6,6 +6,7 @@
 package DataAccess.DAO;
 
 import DataAccess.Entity.Servicio;
+import DataAccess.Entity.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -77,6 +78,21 @@ public class ServicioDAO {
         } finally {
             em.close();
             return servicio;
+        }
+    }
+    
+    public void remove(int id) {
+        EntityManager em = emf.createEntityManager();
+        Servicio servicio = em.find(Servicio.class, id);
+        em.getTransaction().begin();
+        
+        try {
+            em.remove(servicio);
+            em.getTransaction().commit();
+        } catch(Exception e) {
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
         }
     }
 }
