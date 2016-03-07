@@ -54,7 +54,7 @@ public class LoginBeanTest {
     public void testLoginUser() {
         System.out.println("LoginUser Test");
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Usuario usuarioTest = usuarioDAO.searchByUsuario(usuario.getUsuario());
+        Usuario usuarioTest = usuarioDAO.searchByNombre(usuario.getUsuario());
         assertEquals(usuario.getUsuario(), usuarioTest.getUsuario());
     }
     
