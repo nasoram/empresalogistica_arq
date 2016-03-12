@@ -33,12 +33,19 @@ public class OperadoresBean {
     private String password2;
     private int id;
     private int dato;
+    private final HttpServletRequest httpServletRequest;
+    private final FacesContext facesContext;
     
     
     /**
      * Creates a new instance of OperadoresBean
      */
     public OperadoresBean() {
+        facesContext = FacesContext.getCurrentInstance();
+        httpServletRequest = (HttpServletRequest)facesContext.getExternalContext().getRequest();
+        if (httpServletRequest.getSession().getAttribute("IdUsuario") != null) {
+            this.id = (int) httpServletRequest.getSession().getAttribute("IdUsuario");
+        }
         HandleOperador operador = new HandleOperador();
         operadores = operador.listaOperadores(rol);
     }
@@ -195,6 +202,11 @@ public class OperadoresBean {
     
     public Boolean noMessage() {
         return !this.message.equals("");
+    }
+    
+    public String cerrarSesion() {
+        httpServletRequest.getSession().removeAttribute("IdUsuario");
+        return "index";
     }
 
 }

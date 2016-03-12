@@ -17,19 +17,29 @@ public class HandleLogin {
     public HandleLogin() {
     }
     
-    public String validateLogin(String usuario, String password){
+//    public String validateLogin(String usuario, String password){
+//        String result = "";
+//        UsuarioDAO usuarioDAO = new UsuarioDAO();
+//        Usuario usuarioR = usuarioDAO.searchByUsuario(usuario);
+//        if (usuarioR != null) {
+//            if (usuarioR.getPassword().equals(password))
+//                result = "";//"Su cuenta de usuario es: " + usuarioR.getUsuario() + "\ny su contraseña: " + usuarioR.getPassword();
+//            else result = "La contraseña es incorrecta.";
+//        } else {
+//            result = "La cuenta no existe.";
+//        } 
+//        
+//        return result;
+//    }
+    
+    public Usuario validateLogin(String usuario, String password){
         String result = "";
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuarioR = usuarioDAO.searchByUsuario(usuario);
         if (usuarioR != null) {
-            if (usuarioR.getPassword().equals(password))
-                result = "";//"Su cuenta de usuario es: " + usuarioR.getUsuario() + "\ny su contraseña: " + usuarioR.getPassword();
-            else result = "La contraseña es incorrecta.";
+            return usuarioR.getPassword().equals(password) ? usuarioR : null;
         } else {
-            result = "La cuenta no existe.";
+            return null;
         } 
-        
-        return result;
     }
-    
 }

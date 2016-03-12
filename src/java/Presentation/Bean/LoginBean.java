@@ -6,8 +6,11 @@
 package Presentation.Bean;
 
 import BusinessLogic.Controller.HandleLogin;
+import DataAccess.Entity.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -20,11 +23,16 @@ public class LoginBean {
     private String user;
     private String password;
     private String message = "";
+    private final HttpServletRequest httpServletRequest;
+    private final FacesContext facesContext;
+    
 
     /**
      * Creates a new instance of LoginBean
      */
     public LoginBean() {
+        facesContext = FacesContext.getCurrentInstance();
+        httpServletRequest = (HttpServletRequest)facesContext.getExternalContext().getRequest();
     }
 
     public String getUser() {
@@ -55,11 +63,28 @@ public class LoginBean {
         return !this.message.equals("");
     }
     
+//    public String loginUser(){   
+//        HandleLogin login = new HandleLogin();
+//        message = login.validateLogin(user, password);
+//        if (!message.equals("")) return "index";
+//        else{
+//            httpServletRequest.getSession().setAttribute("sesionUsuario", user);
+//            return "envio";
+//        }
+//    }
     public String loginUser(){   
         HandleLogin login = new HandleLogin();
-        message = login.validateLogin(user, password);
-        if (!message.equals("")) return "index";
-        else return "envio";
+        Usuario usuario;
+        usuario = login.validateLogin(user, password);
+        if (usuario == null) {
+            message = "Datos incorrectos.";
+            return "index";
+        }
+        else{
+            httpServletRequest.getSession().setAttribute("IdUsuario", usuario.getId());
+            message = "Sesión iniciada!";
+            return "envio";
+        }
     }
     
 }

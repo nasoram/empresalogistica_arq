@@ -50,7 +50,8 @@
                             <h:message for="fecha"/>
                         </div>
                         <br/>
-                        <h:commandButton class="btn btn-primary" value="Crear" action="#{servicioBean.crearServicio()}"></h:commandButton>
+                        <h:commandButton class="btn btn-primary" value="Crear" action="#{servicioBean.crearServicio()}"></h:commandButton> &nbsp;
+                        <h:link outcome="lista" class="btn btn-default">Cancelar</h:link> 
 
                         <c:if test="#{servicioBean.noMessage()}" >
                             <div class="alert alert-danger" role="alert">
