@@ -28,16 +28,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author johngonzalez
+ * @author Nelson
  */
 @Entity
-@Table(name = "Servicio")
+@Table(name = "servicio")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Servicio.findAll", query = "SELECT s FROM Servicio s"),
     @NamedQuery(name = "Servicio.findById", query = "SELECT s FROM Servicio s WHERE s.id = ?1"),
-    @NamedQuery(name = "Servicio.findByNombre", query = "SELECT s FROM Servicio s WHERE s.nombre = :nombre"),
-    @NamedQuery(name = "Servicio.findByFecha", query = "SELECT s FROM Servicio s WHERE s.fecha = :fecha")})
+    @NamedQuery(name = "Servicio.findByNombre", query = "SELECT s FROM Servicio s WHERE s.nombre = ?1"),
+    @NamedQuery(name = "Servicio.findByFecha", query = "SELECT s FROM Servicio s WHERE s.fecha = :fecha"),
+    @NamedQuery(name = "Servicio.findByDescripcion", query = "SELECT s FROM Servicio s WHERE s.descripcion = :descripcion")})
 public class Servicio implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,6 +57,9 @@ public class Servicio implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    @Size(max = 150)
+    @Column(name = "descripcion")
+    private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idServicio")
     private Collection<Solicitud> solicitudCollection;
 
@@ -94,6 +98,14 @@ public class Servicio implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @XmlTransient

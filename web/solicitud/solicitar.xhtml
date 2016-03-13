@@ -28,11 +28,9 @@
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="../envio.xhtml">Inicio</a></li>
-                            <li><h:link outcome="/operador/lista">Operadores Logísticos</h:link></li>
-                            <li><h:link outcome="/servicio/lista">Servicios</h:link></li>
                             <li><a href="../index.xhtml">Cerrar Sesión</a></li>
                         </ul>
-                    </div>
+                    </div><!--/.nav-collapse -->
                 </div>
             </nav>
         </h:form>
@@ -60,12 +58,8 @@
                         <h:outputText value="#{op.descripcion}" style="word-wrap:break-word;"/>
                     </h:column>
                     <h:column>
-                        <h:link outcome="ver?id=#{op.id}">
-                            <span class="glyphicon glyphicon-search"></span> Ver</h:link> &nbsp;
-                            <h:link outcome="editar?id=#{op.id}">
-                            <span class="glyphicon glyphicon-edit"></span> Editar</h:link> &nbsp;
-                        <h:link outcome="eliminar?id=#{op.id}">
-                            <span class="glyphicon glyphicon-erase"></span> Eliminar</h:link> &nbsp;
+                        <h:commandLink action="#{solicitudesBean.crearSolicitud(op.id)}">
+                            <span class="glyphicon glyphicon-check"></span> Solicitar</h:commandLink>
                     </h:column>
                 </h:dataTable>
                 <br/>
@@ -77,9 +71,6 @@
                     </div>
                     <br/>
                 </c:if>
-                <br/>
-                <h:link outcome="crear" styleClass="btn btn-primary">
-                            <span class="glyphicon glyphicon-floppy-disk"></span> Crear Servicio</h:link>
             </h:form>
             <script type="text/javascript" src="js/bootstrap.min.js" ></script>
         </div>        

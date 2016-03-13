@@ -28,12 +28,13 @@ public class HandleServicio {
         return servicios;
     }
     
-    public String crearServicio(String nombre, Date fecha) {
+    public String crearServicio(String nombre, Date fecha, String descripcion) {
         
         Servicio servicio = new Servicio();
         
         servicio.setNombre(nombre);
         servicio.setFecha(fecha);
+        servicio.setDescripcion(descripcion);
 
         ServicioDAO servicioDAO = new ServicioDAO();
         Servicio servicioE = servicioDAO.persist(servicio);
@@ -56,7 +57,7 @@ public class HandleServicio {
         }
     }
     
-    public String editarServicio(int id, String nombre, String fecha) {
+    public String editarServicio(int id, String nombre, String fecha, String descripcion) {
         ServicioDAO servicioDAO = new ServicioDAO();
         Servicio servicio = null;
         
@@ -65,6 +66,7 @@ public class HandleServicio {
             servicio.setNombre(nombre);
             Date fechaF = new SimpleDateFormat("MMMM dd, yyyy").parse(fecha);
             servicio.setFecha(fechaF);
+            servicio.setDescripcion(descripcion);
             
             Servicio servicioE = servicioDAO.persist(servicio);
             if (servicioE != null) {

@@ -49,9 +49,12 @@
                             <h:inputText id="fecha" class="form-control" value="#{servicioBean.fecha}" pt:placeholder="Fecha [Mes Día, Año]" required="true"></h:inputText>
                             <h:message for="fecha"/>
                         </div>
+                        <div class="form-group">
+                            <h:inputText id="descripcion" class="form-control" value="#{servicioBean.descripcion}" pt:placeholder="Descripción (150 caracteres máx.)"></h:inputText>
+                            <h:message for="descripcion"/>
+                        </div>
                         <br/>
-                        <h:commandButton class="btn btn-primary" value="Crear" action="#{servicioBean.crearServicio()}"></h:commandButton> &nbsp;
-                        <h:link outcome="lista" class="btn btn-default">Cancelar</h:link> 
+                        <h:commandLink styleClass="btn btn-primary" action="#{servicioBean.crearServicio()}"><span class="glyphicon glyphicon-floppy-save"> Crear</span></h:commandLink>
 
                         <c:if test="#{servicioBean.noMessage()}" >
                             <div class="alert alert-danger" role="alert">
@@ -68,6 +71,3 @@
         </div>        
     </h:body>
 </html>
-
-
-

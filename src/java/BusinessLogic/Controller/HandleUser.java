@@ -6,6 +6,8 @@
 package BusinessLogic.Controller;
 
 import DataAccess.DAO.UsuarioDAO;
+import DataAccess.DAO.UsuarioDAO;
+import DataAccess.Entity.Usuario;
 import DataAccess.Entity.Usuario;
 
 /**
@@ -33,14 +35,17 @@ public class HandleUser {
         }        
     }
 
-    public String toString(Usuario user) {
-        return "Usuario: " + user.getUsuario() 
-                + "\nNombre: " + user.getNombre()
-                + "\nDocumento: " + user.getDocumento()
-                + "\nRol: " + user.getRol()
-                + "\nContraseña:" + user.getPassword();
+    public Usuario verUsuario(int id) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = null;
+        
+        try {
+            usuario = usuarioDAO.searchById(id);
+        } catch (Exception e) {
+        } finally {
+            return usuario;
+        }
     }
-    
     
     
 }

@@ -25,20 +25,19 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author johngonzalez
+ * @author Nelson
  */
 @Entity
-@Table(name = "Usuario")
+@Table(name = "usuario")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = ?1"),
-    @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
+    @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = ?1"),
     @NamedQuery(name = "Usuario.findByDocumento", query = "SELECT u FROM Usuario u WHERE u.documento = :documento"),
     @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM Usuario u WHERE u.rol = ?1"),
     @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
-    @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = ?1"),
-    @NamedQuery(name = "Usuario.deleteUsuario", query = "DELETE FROM Usuario WHERE id = ?1"),})
+    @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = ?1")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,9 +66,7 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "password")
     private String password;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "usuario")
     private String usuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")

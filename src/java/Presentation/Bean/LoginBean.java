@@ -82,9 +82,35 @@ public class LoginBean {
         }
         else{
             httpServletRequest.getSession().setAttribute("IdUsuario", usuario.getId());
+            httpServletRequest.getSession().setAttribute("IdNombre", usuario.getNombre());
+            httpServletRequest.getSession().setAttribute("IdRol", usuario.getRol());
             message = "Sesión iniciada!";
             return "envio";
         }
     }
     
+    public boolean isCliente(){
+        String rol = httpServletRequest.getSession().getAttribute("IdRol").toString();
+        return rol.equals("Cliente");
+    }
+    public boolean isOperador(){
+        String rol = httpServletRequest.getSession().getAttribute("IdRol").toString();
+        return rol.equals("Operador");
+    }
+    public boolean isAdministrador(){
+        String rol = httpServletRequest.getSession().getAttribute("IdRol").toString();
+        return rol.equals("Administrador");
+    }
+    
+    public boolean isLogout(){
+        return (httpServletRequest.getSession().getAttribute("IdRol").toString() == null);
+         
+    }
+    
+    public String logout(){
+        httpServletRequest.getSession().removeAttribute("IdUsuario");
+        httpServletRequest.getSession().removeAttribute("IdNombre");
+        httpServletRequest.getSession().removeAttribute("IdRol");
+        return "envio";
+    }
 }

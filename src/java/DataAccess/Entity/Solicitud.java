@@ -20,20 +20,21 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author johngonzalez
+ * @author Nelson
  */
 @Entity
-@Table(name = "Solicitud")
+@Table(name = "solicitud")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Solicitud.findAll", query = "SELECT s FROM Solicitud s"),
-    @NamedQuery(name = "Solicitud.findById", query = "SELECT s FROM Solicitud s WHERE s.id = :id"),
-    @NamedQuery(name = "Solicitud.findByFecha", query = "SELECT s FROM Solicitud s WHERE s.fecha = :fecha")})
+    @NamedQuery(name = "Solicitud.findById", query = "SELECT s FROM Solicitud s WHERE s.id = ?1"),
+    @NamedQuery(name = "Solicitud.findByIdOperador", query = "SELECT s FROM Solicitud s WHERE s.idOperador = ?1"),
+    @NamedQuery(name = "Solicitud.findByFechaEnvio", query = "SELECT s FROM Solicitud s WHERE s.fechaEnvio = :fechaEnvio"),
+    @NamedQuery(name = "Solicitud.findByFechaRecepcion", query = "SELECT s FROM Solicitud s WHERE s.fechaRecepcion = :fechaRecepcion")})
 public class Solicitud implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,11 +43,14 @@ public class Solicitud implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "fecha")
+    @Column(name = "id_operador")
+    private Integer idOperador;
+    @Column(name = "fecha_envio")
     @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private Date fechaEnvio;
+    @Column(name = "fecha_recepcion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaRecepcion;
     @JoinColumn(name = "id_servicio", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Servicio idServicio;
@@ -56,14 +60,15 @@ public class Solicitud implements Serializable {
 
     public Solicitud() {
     }
+    
+    public Solicitud(Usuario idUsuario, Servicio idServicio, Date fecha_recepcion) {
+        this.idUsuario = idUsuario;
+        this.idServicio = idServicio;
+        this.fechaRecepcion = fecha_recepcion;
+    }
 
     public Solicitud(Integer id) {
         this.id = id;
-    }
-
-    public Solicitud(Integer id, Date fecha) {
-        this.id = id;
-        this.fecha = fecha;
     }
 
     public Integer getId() {
@@ -74,12 +79,28 @@ public class Solicitud implements Serializable {
         this.id = id;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Integer getIdOperador() {
+        return idOperador;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setIdOperador(Integer idOperador) {
+        this.idOperador = idOperador;
+    }
+
+    public Date getFechaEnvio() {
+        return fechaEnvio;
+    }
+
+    public void setFechaEnvio(Date fechaEnvio) {
+        this.fechaEnvio = fechaEnvio;
+    }
+
+    public Date getFechaRecepcion() {
+        return fechaRecepcion;
+    }
+
+    public void setFechaRecepcion(Date fechaRecepcion) {
+        this.fechaRecepcion = fechaRecepcion;
     }
 
     public Servicio getIdServicio() {

@@ -5,17 +5,13 @@
  */
 package Presentation.Bean;
 
-import BusinessLogic.Controller.HandleOperador;
 import BusinessLogic.Controller.HandleServicio;
 import DataAccess.Entity.Servicio;
-import DataAccess.Entity.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -32,6 +28,7 @@ public class ServicioBean {
 
     private String nombre;
     private String fecha;
+    private String descripcion;
     private int id;
     private String message = "";
     private List<Servicio> servicios;
@@ -58,6 +55,14 @@ public class ServicioBean {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getMessage() {
@@ -93,7 +98,7 @@ public class ServicioBean {
         try {
             HandleServicio servicio = new HandleServicio();
             Date fechaF = new SimpleDateFormat("MMMM dd, yyyy").parse(fecha);
-            message = servicio.crearServicio(nombre, fechaF);
+            message = servicio.crearServicio(nombre, fechaF, descripcion);
             if (message.equals("")){
                 listaServicios();
                 return "lista";
@@ -128,9 +133,11 @@ public class ServicioBean {
         this.nombre = servicio.getNombre();
         this.fecha = servicio.getFecha().toString();
         this.id = id;
+        this.descripcion = servicio.getDescripcion();
         
         return "" + id;
     }
+    
     public String verServicio() {
         Integer id;
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -145,13 +152,15 @@ public class ServicioBean {
         this.nombre = servicio.getNombre();
         this.fecha = servicio.getFecha().toString();
         this.id = id;
+        this.descripcion = servicio.getDescripcion();
         
         return "" + id;
     }
     
     public String editarServicio() {
+        
         HandleServicio servicio = new HandleServicio();
-        message = servicio.editarServicio(id, nombre, fecha);
+        message = servicio.editarServicio(id, nombre, fecha, descripcion);
         if (message.equals("")) {
             return "lista";
         } else {

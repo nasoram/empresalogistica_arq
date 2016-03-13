@@ -6,6 +6,7 @@
 package Presentation.Bean;
 
 import BusinessLogic.Controller.HandleUser;
+import DataAccess.Entity.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
@@ -17,6 +18,7 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class UserBean {
     
+    private int id;
     private String user;
     private String password;
     private String password2;
@@ -29,6 +31,14 @@ public class UserBean {
      * Creates a new instance of UserBean
      */
     public UserBean() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUser() {
@@ -86,8 +96,6 @@ public class UserBean {
     public void setRol(String rol) {
         this.rol = rol;
     }
-
-
     
     public String createUser(){   
         HandleUser usuario = new HandleUser();
@@ -100,6 +108,19 @@ public class UserBean {
             return "registro";//Contraseñas no coinciden
         }
         
+    }
+    
+    public String verUsuario() {
+        HandleUser usuarioH = new HandleUser();
+        Usuario usuario = usuarioH.verUsuario(id);
+        
+        this.nombre = usuario.getNombre();
+        this.user = usuario.getUsuario();
+        this.documento = usuario.getDocumento();
+        this.password = usuario.getPassword();
+        this.rol = usuario.getRol();
+        
+        return "" + id;
     }
     
     public Boolean noMessage(){

@@ -5,7 +5,7 @@
  */
 package DataAccess.DAO;
 
-import DataAccess.Entity.Servicio;
+import DataAccess.Entity.Solicitud;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,77 +16,61 @@ import javax.persistence.Query;
  *
  * @author Nelson
  */
-public class ServicioDAO {
+public class SolicitudDAO {
     
     public EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmpresaLogisticaPU");
     
-    public Servicio persist(Servicio servicio) {
+    public Solicitud persist(Solicitud solicitud) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
         try {
-            em.merge(servicio);
+            em.merge(solicitud);
             em.getTransaction().commit();
         } catch(Exception e) {
             em.getTransaction().rollback();
         } finally {
             em.close();
-            return servicio;  
+            return solicitud;  
         }
     }
     
-    public Servicio searchByNombre(String name) {
-        
+    public List<Solicitud> listaSolicitudes() {
         EntityManager em = emf.createEntityManager();
-        Servicio servicio = null;
-        Query q = em.createNamedQuery("Servicio.findByNombre");
-        q.setParameter(1, name);
+        List<Solicitud> solicitudes = null;
+        Query q = em.createNamedQuery("Solicitud.findAll");
         
         try {
-            servicio = (Servicio) q.getSingleResult();
+            solicitudes = q.getResultList();
         } catch (Exception e) {
         } finally {
             em.close();
-            return servicio;
+            return solicitudes;            
         }
     }
     
-    public List<Servicio> listaServicios() {
+    public Solicitud searchById(int id) {
         EntityManager em = emf.createEntityManager();
-        List<Servicio> servicios = null;
-        Query q = em.createNamedQuery("Servicio.findAll");
-        
-        try {
-            servicios = q.getResultList();
-        } catch (Exception e) {
-        } finally {
-            em.close();
-            return servicios;            
-        }
-    }
-    
-    public Servicio searchById(int id) {
-        EntityManager em = emf.createEntityManager();
-        Servicio servicio = null;
-        Query q = em.createNamedQuery("Servicio.findById");
+        Solicitud solicitud = null;
+        Query q = em.createNamedQuery("Solicitud.findById");
         q.setParameter(1, id);
         
         try {
-            servicio = (Servicio) q.getSingleResult();
+            solicitud = (Solicitud) q.getSingleResult();
         } catch (Exception e) {
         } finally {
             em.close();
-            return servicio;
+            return solicitud;
         }
     }
     
     public void remove(int id) {
         EntityManager em = emf.createEntityManager();
-        Servicio servicio = em.find(Servicio.class, id);
+        Solicitud solicitud = em.find(Solicitud.class, id);
         em.getTransaction().begin();
         
         try {
-            em.remove(servicio);
+            em.remove(solicitud);
             em.getTransaction().commit();
         } catch(Exception e) {
             em.getTransaction().rollback();
@@ -94,4 +78,5 @@ public class ServicioDAO {
             em.close();
         }
     }
+    
 }

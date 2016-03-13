@@ -53,6 +53,12 @@
                             <h:message for="fecha"/>
                         </div>
                         <br/>
+                        <div class="form-group">
+                            <h:outputLabel for="descripcion" value="Descripcion:"/>
+                            <h:inputText id="descripcion" class="form-control" value="#{servicioBean.descripcion}" pt:placeholder="Descripción (150 caracteres máx.)"></h:inputText>
+                            <h:message for="descripcion"/>
+                        </div>
+                        <br/>
                         <h:commandButton class="btn btn-primary" value="Editar" action="#{servicioBean.editarServicio()}"></h:commandButton> &nbsp;
                         <h:link outcome="lista" class="btn btn-default">Cancelar</h:link>
 
@@ -71,6 +77,3 @@
         </div>        
     </h:body>
 </html>
-
-
-
