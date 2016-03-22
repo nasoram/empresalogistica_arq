@@ -60,9 +60,12 @@
                         <h:outputText value="#{op.usuario}"/>
                     </h:column>
                     <h:column>
-                        <h:link outcome="ver?id=#{op.id}">Ver</h:link> &nbsp;
-                        <h:link outcome="editar?id=#{op.id}">Editar</h:link> &nbsp;
-                        <h:link outcome="eliminar?id=#{op.id}">Eliminar</h:link> &nbsp;
+                        <h:link outcome="ver?id=#{op.id}">
+                        <span class="glyphicon glyphicon-search"></span> Ver</h:link> &nbsp;
+                        <h:link outcome="editar?id=#{op.id}">
+                            <span class="glyphicon glyphicon-edit"></span> Editar</h:link> &nbsp;
+                        <h:link outcome="eliminar?id=#{op.id}">
+                            <span class="glyphicon glyphicon-erase"></span> Eliminar</h:link> &nbsp;
                     </h:column>
                 </h:dataTable>
                 <br/>
@@ -76,11 +79,8 @@
                 </c:if>
                 <br/>
                 <h:link outcome="crear" class="btn btn-primary">Crear Operador</h:link>
-                <h:outputLabel value="Id: "/>
-                <h:outputText value="#{operadoresBean.id}"/>
             </h:form>
             <script type="text/javascript" src="js/bootstrap.min.js" ></script>
         </div>        
     </h:body>
 </html>
-
