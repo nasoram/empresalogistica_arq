@@ -9,6 +9,8 @@ import BusinessLogic.Controller.HandleUser;
 import DataAccess.Entity.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -26,11 +28,15 @@ public class UserBean {
     private String nombre;
     private String documento;
     private String rol = "Cliente";
+    private final HttpServletRequest httpServletRequest;
+    private final FacesContext facesContext;
 
     /**
      * Creates a new instance of UserBean
      */
     public UserBean() {
+        facesContext = FacesContext.getCurrentInstance();
+        httpServletRequest = (HttpServletRequest)facesContext.getExternalContext().getRequest();
     }
 
     public int getId() {
@@ -101,8 +107,14 @@ public class UserBean {
         HandleUser usuario = new HandleUser();
         if (password.equals(password2)){
             message = usuario.createUsuario(nombre, documento, rol, password, user);
-            if (message.equals("")) return "registro";
-            else return "envio";
+            if (message.equals("")){ 
+                return "registro";
+            }else{ 
+                //httpServletRequest.getSession().setAttribute("IdUsuario", usuario.getId());
+                httpServletRequest.getSession().setAttribute("IdNombre", nombre);
+                httpServletRequest.getSession().setAttribute("IdRol", rol);
+                return "envio";
+            }
         } else {
             message = "Las contraseñas no coinciden";
             return "registro";//Contraseñas no coinciden

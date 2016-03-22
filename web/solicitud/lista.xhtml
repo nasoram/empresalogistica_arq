@@ -28,6 +28,9 @@
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="../envio.xhtml">Inicio</a></li>
+                                <c:if test="#{loginBean.isOperador()}" >
+                                    <li><h:link outcome="lista">Solicitudes</h:link></li>
+                                </c:if>
                             <li><a href="../index.xhtml">Cerrar Sesión</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->

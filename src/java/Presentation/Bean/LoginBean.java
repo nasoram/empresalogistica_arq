@@ -90,27 +90,36 @@ public class LoginBean {
     }
     
     public boolean isCliente(){
-        String rol = httpServletRequest.getSession().getAttribute("IdRol").toString();
+        String rol;
+        try{
+            rol = httpServletRequest.getSession().getAttribute("IdRol").toString();
+        }catch(NullPointerException e){
+            return false;
+        }
         return rol.equals("Cliente");
     }
     public boolean isOperador(){
-        String rol = httpServletRequest.getSession().getAttribute("IdRol").toString();
+        String rol;
+        try{
+            rol = httpServletRequest.getSession().getAttribute("IdRol").toString();
+        }catch(NullPointerException e){
+            return false;
+        }
         return rol.equals("Operador");
     }
     public boolean isAdministrador(){
-        String rol = httpServletRequest.getSession().getAttribute("IdRol").toString();
+        String rol;
+        try{
+            rol = httpServletRequest.getSession().getAttribute("IdRol").toString();
+        }catch(NullPointerException e){
+            return false;
+        }
         return rol.equals("Administrador");
     }
     
-    public boolean isLogout(){
-        return (httpServletRequest.getSession().getAttribute("IdRol").toString() == null);
-         
-    }
-    
-    public String logout(){
+    public void logout(){
         httpServletRequest.getSession().removeAttribute("IdUsuario");
         httpServletRequest.getSession().removeAttribute("IdNombre");
         httpServletRequest.getSession().removeAttribute("IdRol");
-        return "envio";
     }
 }

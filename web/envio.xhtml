@@ -26,9 +26,6 @@
                     </button>
                     <a class="navbar-brand" href="#">Empresa Logistica</a>
                 </div>
-                <c:if test="#{loginBean.isLogout()}" >
-                    <meta http-equiv="refresh" content="0; url=http://example.com/" />
-                </c:if>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="envio.xhtml">Inicio</a></li>
@@ -42,7 +39,7 @@
                             <li><h:link outcome="operador/lista">Operadores Logísticos</h:link></li>
                             <li><h:link outcome="servicio/lista">Servicios</h:link></li>
                         </c:if>
-                        <li>><h:commandButton value="Cerrar Sesion" action="#{loginBean.logout()}" /> </li>
+                        <li><h:link outcome="index">Cerrar Sesión</h:link></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

@@ -15,7 +15,7 @@
     <h:body>
         <div class="container">
         <h:form class="form-signin">
-            
+            #{loginBean.logout()}
             <center><h2 class="form-signin-heading">EMPRESA LOGÍSTICA<br/> <small>[Inicio de sesión] <span class="glyphicon glyphicon-user"></span></small></h2></center>
                 
             <h:outputLabel for="txtUser" value="Usuario:" class="sr-only"/>
@@ -40,8 +40,9 @@
             </c:if>
             
             <h:link outcome="registro" class="pull-right" >Registrarse <span class="glyphicon glyphicon-menu-right"></span></h:link>
-
+            
             </h:form>
+            
             
         </div>
         <script type="text/javascript" src="js/bootstrap.min.js" ></script>
