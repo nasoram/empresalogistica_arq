@@ -49,6 +49,20 @@ public class SolicitudDAO {
         }
     }
     
+    public List<Solicitud> listaSolicitudesSinAtender() {
+        EntityManager em = emf.createEntityManager();
+        List<Solicitud> solicitudes = null;
+        Query q = em.createNamedQuery("Solicitud.findUnattended");
+        
+        try {
+            solicitudes = q.getResultList();
+        } catch (Exception e) {
+        } finally {
+            em.close();
+            return solicitudes;            
+        }
+    }
+    
     public Solicitud searchById(int id) {
         EntityManager em = emf.createEntityManager();
         Solicitud solicitud = null;

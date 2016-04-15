@@ -27,6 +27,14 @@ public class HandleSolicitud {
         return solicitudes;
     }
     
+    public List<Solicitud> listaSolicitudesSinAtender() {
+        SolicitudDAO solicitud = new SolicitudDAO();
+        List solicitudes = null;
+        
+        solicitudes = solicitud.listaSolicitudesSinAtender();
+        return solicitudes;
+    }
+    
     public String crearSolicitud(Usuario usuario, Servicio servicio, Date fecha_recepcion) {
         
         Solicitud solicitud = new Solicitud();
@@ -38,6 +46,20 @@ public class HandleSolicitud {
         SolicitudDAO solicitudDAO = new SolicitudDAO();
         Solicitud solicitudE = solicitudDAO.persist(solicitud);
         return (solicitudE != null) ? "" : "Solicitud no pudo ser creada!";
+    }
+    
+    public String atenderSolicitud(Usuario operador, Solicitud solicitud, Date fecha_envio) {
+        SolicitudDAO solicitudDAO = new SolicitudDAO();
+        
+        try {
+            solicitud.setFechaEnvio(fecha_envio);
+            solicitud.setIdOperador(operador.getId());
+            
+            Solicitud solicitudE = solicitudDAO.persist(solicitud);
+            return (solicitudE != null) ? "" : "Solicitud no pudo ser atendida!";
+        } catch (Exception e) {
+            return "Solicitud no fue atendida!";
+        } 
     }
     
     public Solicitud verSolicitud(int id) {

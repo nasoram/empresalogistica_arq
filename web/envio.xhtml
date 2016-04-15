@@ -33,7 +33,7 @@
                             <li><h:link outcome="solicitud/solicitar">Solicitud</h:link></li>
                         </c:if>
                         <c:if test="#{loginBean.isOperador()}" >
-                            <li><h:link outcome="solicitud/lista">Solicitudes</h:link></li>
+                            <li><h:link outcome="solicitud/solicitudes">Solicitudes</h:link></li>
                         </c:if>
                         <c:if test="#{loginBean.isAdministrador()}" >
                             <li><h:link outcome="operador/lista">Operadores Logísticos</h:link></li>

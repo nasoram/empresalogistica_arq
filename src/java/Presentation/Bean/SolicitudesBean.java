@@ -14,8 +14,10 @@ import DataAccess.Entity.Usuario;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,8 +32,12 @@ public class SolicitudesBean {
     private int id;
     private int idServicio;
     private int idCliente;
+    private int idSolicitud;
+    private int idOperador;
+    private Solicitud solicitud;
     private Servicio servicio;
     private Usuario cliente;
+    private Usuario operador;
     private String message = "";
     private List<Solicitud> solicitudes;
     private final HttpServletRequest httpServletRequest;
@@ -105,28 +111,54 @@ public class SolicitudesBean {
     }
 
     public String crearSolicitud(int id){
-            this.idServicio = id;
-            HandleSolicitud solicitud = new HandleSolicitud();
-            HandleServicio servicioH = new HandleServicio();
-            HandleUser clienteH = new HandleUser();
-            this.servicio = servicioH.verServicio(idServicio);
-            this.cliente = clienteH.verUsuario(idCliente);
-            
-            Date timeStamp = Calendar.getInstance().getTime();
-            
-            message = solicitud.crearSolicitud(cliente, servicio, timeStamp);
+        this.idServicio = id;
+        HandleSolicitud solicitudH = new HandleSolicitud();
+        HandleServicio servicioH = new HandleServicio();
+        HandleUser clienteH = new HandleUser();
+        this.servicio = servicioH.verServicio(idServicio);
+        this.cliente = clienteH.verUsuario(idCliente);
+
+        Date timeStamp = Calendar.getInstance().getTime();
+
+        message = solicitudH.crearSolicitud(cliente, servicio, timeStamp);
 
         return message.equals("") ? "solicitado" : "solicitud";
-        }
+    }
     
-    public List<Solicitud> listaSolicitud() {
-        HandleSolicitud solicitud = new HandleSolicitud();
-        return solicitud.listaSolicitudes();
+    public String atenderSolicitud(){
+        Integer id;
+        
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+
+        id = new Integer((String)params.get("id"));
+        
+        this.idSolicitud = id;
+        this.idOperador = this.idCliente;
+        HandleSolicitud solicitudH = new HandleSolicitud();
+        HandleUser operadorH = new HandleUser();
+        this.solicitud = solicitudH.verSolicitud(idSolicitud);
+        this.operador = operadorH.verUsuario(idOperador);
+
+        Date timeStamp = Calendar.getInstance().getTime();
+
+        message = solicitudH.atenderSolicitud(operador, solicitud, timeStamp);
+
+        return message.equals("") ? "atendido" : "solicitudes";
     }
     
     public void listaSolicitudes() {
-        HandleSolicitud solicitud = new HandleSolicitud();
-        solicitudes = solicitud.listaSolicitudes();
+        HandleSolicitud solicitudH = new HandleSolicitud();
+        solicitudes = solicitudH.listaSolicitudes();
+    }
+    
+    public void listaSolicitudesSinAtender() {
+        HandleSolicitud solicitudH = new HandleSolicitud();
+        solicitudes = solicitudH.listaSolicitudesSinAtender();
+    }
+    
+    public Boolean noMessage() {
+        return !this.message.equals("");
     }
     
 }

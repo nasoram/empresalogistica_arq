@@ -41,27 +41,27 @@
             <h:form>
                 <center><h2>Servicios</h2></center>
                 #{servicioBean.listaServicios()}
-                <h:dataTable value="#{servicioBean.servicios}" var="op" class="table table-striped">
+                <h:dataTable value="#{servicioBean.servicios}" var="serv" class="table table-striped">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Nombre"/>
                         </f:facet>
-                        <h:outputText value="#{op.nombre}" style="font-weight: bold"/>
+                        <h:outputText value="#{serv.nombre}" style="font-weight: bold"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Fecha"/>
                         </f:facet>
-                        <h:outputText value="#{op.fecha}"/>
+                        <h:outputText value="#{serv.fecha}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Descripcion"/>
                         </f:facet>
-                        <h:outputText value="#{op.descripcion}" style="word-wrap:break-word;"/>
+                        <h:outputText value="#{serv.descripcion}" style="word-wrap:break-word;"/>
                     </h:column>
                     <h:column>
-                        <h:commandLink action="#{solicitudesBean.crearSolicitud(op.id)}">
+                        <h:commandLink action="#{solicitudesBean.crearSolicitud(serv.id)}">
                             <span class="glyphicon glyphicon-check"></span> Solicitar</h:commandLink>
                     </h:column>
                 </h:dataTable>
